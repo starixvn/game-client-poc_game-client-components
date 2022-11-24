@@ -4,6 +4,6 @@ const { ccclass, property } = _decorator;
 @ccclass("Foo")
 export class Foo extends Component {
   start() {
-    console.log("foo");
+    console.log("foo 1");
   }
 }
