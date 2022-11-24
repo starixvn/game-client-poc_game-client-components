@@ -17,7 +17,7 @@
   "contributions": {
     "asset-db": {
       "mount": {
-        "path": "./src/assets",
+        "path": "./assets",
         "readonly": false
       }
     }
