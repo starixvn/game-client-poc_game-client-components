@@ -15,7 +15,7 @@ export class DragonTailBoard {
   private readonly minimumHeight: number = 2;
   private height: number;
 
-  private nodes: Map<string, DragonTailNode>;
+  private nodes: { [key: string]: DragonTailNode } = {};
   private positivePosition: DragonTailPosition;
   private negativePosition: DragonTailPosition;
   private index: number;
@@ -26,7 +26,7 @@ export class DragonTailBoard {
         ? options.height
         : this.minimumHeight;
 
-    this.nodes = new Map<string, DragonTailNode>();
+    //this.nodes = new Map<string, DragonTailNode>();
 
     this.positivePosition = DragonTailPosition.getInstance(0, 0);
     this.negativePosition = DragonTailPosition.getInstance(0, 0);
@@ -36,20 +36,20 @@ export class DragonTailBoard {
 
   getStatus(x: number, y: number): boolean | undefined {
     const position = DragonTailPosition.getInstance(x, y);
-    const node = this.nodes.get(position.getName());
+    const node = this.nodes[position.getName()];
 
     return node?.positive;
   }
 
   getIndex(x: number, y: number): number | undefined {
     const position = DragonTailPosition.getInstance(x, y);
-    const node = this.nodes.get(position.getName());
+    const node = this.nodes[position.getName()];
 
     return node?.index;
   }
 
   getPosition(index: number): number[] {
-    const values = [...this.nodes.values()];
+    const values = Object.values(this.nodes);
     const node = values.find((node) => node.index === index);
 
     return node ? [node.position.x, node.position.y] : [];
@@ -60,7 +60,7 @@ export class DragonTailBoard {
   }
 
   getWidth() {
-    const keys = [...this.nodes.keys()];
+    const keys = Object.keys(this.nodes);
     const maxX = Math.max(...keys.map((key) => Number(key.split("-")[0])));
 
     return maxX + 1;
@@ -70,7 +70,7 @@ export class DragonTailBoard {
     if (this.height !== height && this.minimumHeight <= height) {
       this.height = height;
 
-      const nodes = [...this.nodes.values()].sort((a, b) => a.index - b.index);
+      const nodes = Object.values(this.nodes).sort((a, b) => a.index - b.index);
       const values = nodes.map((node) => node.positive);
 
       this.clear();
@@ -91,7 +91,7 @@ export class DragonTailBoard {
       isEndTail: isEndTail,
     };
 
-    this.nodes.set(node.position.getName(), node);
+    this.nodes[node.position.getName()] = node;
     this.updateNextPositions(node, positive);
   }
 
@@ -100,7 +100,7 @@ export class DragonTailBoard {
   }
 
   clear() {
-    this.nodes = new Map<string, DragonTailNode>();
+    this.nodes = {};
 
     this.positivePosition = DragonTailPosition.getInstance(0, 0);
     this.negativePosition = DragonTailPosition.getInstance(0, 0);
@@ -123,8 +123,10 @@ export class DragonTailBoard {
   }
 
   protected getInnerWidth(): number {
-    const keys = [...this.nodes.keys()];
-    const firstRow = keys.filter((key) => key.match(/[0-9]*-0/));
+    const keys = Object.keys(this.nodes);
+    const firstRow = keys.filter(
+      (key) => typeof key === "string" && key.match(/[0-9]*-0/)
+    );
     const maxX = Math.max(...firstRow.map((key) => Number(key.split("-")[0])));
 
     return maxX + 1;
@@ -135,10 +137,10 @@ export class DragonTailBoard {
     const right = current.position.getRight();
     const bottomLeft = bottom.getLeft();
     const isBottomValid = bottom.isValid(this.height);
-    const isBottomEmpty = !this.nodes.has(bottom.getName());
+    const isBottomEmpty = !this.nodes[bottom.getName()];
     const bottomLeftHasDifferenceValue =
-      this.nodes.get(bottomLeft.getName())?.positive !== current.positive;
-    const endTailBottomLef = this.nodes.get(bottomLeft.getName())?.isEndTail;
+      this.nodes[bottomLeft.getName()]?.positive !== current.positive;
+    const endTailBottomLef = this.nodes[bottomLeft.getName()]?.isEndTail;
     const isBottomLefNotEndTail = endTailBottomLef === false;
 
     const combineCase = bottomLeftHasDifferenceValue || isBottomLefNotEndTail;

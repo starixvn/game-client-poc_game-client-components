@@ -2,12 +2,12 @@
   "ver": "1.1.40",
   "importer": "prefab",
   "imported": true,
-  "uuid": "2765b6c1-ede9-48d6-9e80-d317916a088e",
+  "uuid": "abd57ba5-05b7-4d65-92f7-6d1aef0f45c2",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "big-road-item"
+    "syncNodeName": "big-road"
   }
 }

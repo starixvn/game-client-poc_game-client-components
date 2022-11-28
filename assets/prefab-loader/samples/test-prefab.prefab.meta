@@ -2,12 +2,12 @@
   "ver": "1.1.40",
   "importer": "prefab",
   "imported": true,
-  "uuid": "375139d9-0033-4245-9b4a-e1ae0b4d3272",
+  "uuid": "7459fa24-a670-4ad3-9efb-6bb4be61d36b",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "inactive-layer"
+    "syncNodeName": "test-prefab"
   }
 }

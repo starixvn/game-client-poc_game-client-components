@@ -1,2 +1,2 @@
-export * from "./big-road-scoreboard/view-models/big-road";
-export * from "./prefab-loader/prefab-loader";
+export * from "./big-road-scoreboard/src/view-models/big-road";
+export * from "./prefab-loader/src/prefab-loader";

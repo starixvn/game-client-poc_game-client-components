@@ -42,17 +42,17 @@ export class BigRoad extends cc.Component {
   private scrollPercent = 1;
 
   protected onLoad(): void {
-    this.content?.on(
+    this?.content?.on(
       cc.Node.EventType.SIZE_CHANGED,
-      this.onContentSizeChanged,
+      this?.onContentSizeChanged,
       this
     );
   }
 
   protected onDestroy(): void {
-    this.content?.off(
+    this?.content?.off(
       cc.Node.EventType.SIZE_CHANGED,
-      this.onContentSizeChanged,
+      this?.onContentSizeChanged,
       this
     );
   }
