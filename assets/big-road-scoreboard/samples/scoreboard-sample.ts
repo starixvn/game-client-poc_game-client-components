@@ -1,5 +1,5 @@
 import * as cc from "cc";
-import { BigRoad, BigRoadOptions } from "../view-models/big-road";
+import { BigRoad, BigRoadOptions } from "../src/view-models/big-road";
 const { ccclass, property } = cc._decorator;
 
 @ccclass

@@ -49,13 +49,13 @@ export class BigRoad extends cc.Component {
     );
   }
 
-  protected onDestroy(): void {
-    this?.content?.off(
-      cc.Node.EventType.SIZE_CHANGED,
-      this?.onContentSizeChanged,
-      this
-    );
-  }
+  // protected onDestroy(): void {
+  //   // this?.content?.off(
+  //   //   cc.Node.EventType.SIZE_CHANGED,
+  //   //   this?.onContentSizeChanged,
+  //   //   this
+  //   // );
+  // }
 
   public initialize(options: BigRoadOptions) {
     this.options = options || {};
